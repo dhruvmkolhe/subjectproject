@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  cleanslate:
+    build: .
+    image: cleanslate:latest
+    env_file:
+      - .env
+    environment:
+      # Override defaults if needed
+      - DAEMON_MODE=${DAEMON_MODE:-false}
+      - WATCH_DIR=${WATCH_DIR:-/data/watch}
+      - OUTPUT_DIR=${OUTPUT_DIR:-/data/clean}
+      - MONGODB_ENABLED=${MONGODB_ENABLED:-true}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://localhost:27017}
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-phobos}
+      - MONGODB_COLLECTION=${MONGODB_COLLECTION:-file_events}
+      - RCLONE_REMOTE_NAME=${RCLONE_REMOTE_NAME:-gdrive}
+      - RCLONE_DEST_PATH=${RCLONE_DEST_PATH:-backups}
+      - HOST=${HOST:-0.0.0.0}
+      - PORT=${PORT:-8000}
+    volumes:
+      - ./data:/data
+      - ./rclone.conf:/root/.config/rclone/rclone.conf:ro
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    restart: unless-stopped
