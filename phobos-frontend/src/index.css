@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 175 80% 50%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 175 60% 40%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 175 80% 50%;
+
+    --radius: 0.75rem;
+
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(175 80% 50%), hsl(190 90% 45%));
+    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(175 80% 50% / 0.08), transparent 40%);
+    --gradient-card: linear-gradient(135deg, hsl(222 47% 10%), hsl(222 47% 8%));
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(175 80% 50% / 0.15), transparent);
+
+    --shadow-glow: 0 0 40px -10px hsl(175 80% 50% / 0.3);
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.5);
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 175 80% 50%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 30% 16%;
+    --sidebar-ring: 175 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glow-border {
+    @apply relative;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .hero-glow {
+    background: var(--gradient-hero);
+  }
+
+  .code-block {
+    @apply relative rounded-lg bg-muted/50 border border-border overflow-hidden;
+  }
+
+  .code-block pre {
+    @apply p-4 overflow-x-auto text-sm leading-relaxed;
+  }
+
+  .nav-link {
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+
+  .feature-card {
+    @apply p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm transition-all duration-300;
+  }
+
+  .feature-card:hover {
+    @apply border-primary/30;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold mb-4;
+  }
+
+  .section-description {
+    @apply text-muted-foreground leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { 
+      box-shadow: 0 0 20px -5px hsl(175 80% 50% / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 40px -5px hsl(175 80% 50% / 0.5);
+    }
+  }
+}
